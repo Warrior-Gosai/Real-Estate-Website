@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="../styles.css" />
+    <title>Buy Sell Property Online</title>
+    <style>
+        .container {
+            width: 90%;
+            margin: 0 auto;
+            padding-top: 50px;
+        }
+
+        section {
+            margin: 50px 0;
+        }
+
+        .section-heading {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #0069bf;
+            position: relative;
+        }
+
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background-color: #007BFF;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* About Us Section */
+        .about-content {
+            text-align: center;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+
+        .about-content p {
+            font-size: 1.2rem;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        /* Team Section */
+        .team-members {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .team-member {
+            background-color: #fff;
+            width: 250px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        .team-member h3 {
+            color: #007BFF;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .team-member p {
+            color: #555;
+            font-size: 1rem;
+        }
+
+        /* Call to Action Section */
+        .cta {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .cta a {
+            background-color: #00C6FF;
+            color: white;
+            font-size: 1.2rem;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .cta a:hover {
+            background-color: #007BFF;
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="nav__header">
+            <div class="nav__logo">
+                <a href="#">Hosale.</a>
+            </div>
+            <div class="nav__menu__btn" id="menu-btn">
+                <i class="ri-menu-3-line"></i>
+            </div>
+        </div>
+        <ul class="nav__links" id="nav-links">
+            <li><a href="../index.php">HOME</a></li>
+            <li><a href="./buy.html">BUY</a></li>
+            <li><a href="./sell.php">SELL</a></li>
+            <li><a href="./contact.php">CONTACT</a></li>
+            <li><a href="./login.php">LOGIN</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <!-- About Us Section -->
+        <section>
+            <div class="about-content">
+                <h2 class="section-heading">Who We Are</h2>
+                <p>
+                    We are a leading real estate agency, specializing in residential and commercial properties. With
+                    years of experience, we offer tailored solutions for clients looking to buy, sell, or rent
+                    properties in the best locations.
+                </p>
+                <p>
+                    Our team is dedicated to delivering exceptional service and building long-term relationships with
+                    our clients. Whether you’re a first-time homebuyer or an experienced investor, we’re here to guide
+                    you every step of the way.
+                </p>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section>
+            <h2 class="section-heading">Meet Our Team</h2>
+            <div class="team-members">
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/150" alt="John Doe">
+                    <h3>John Doe</h3>
+                    <p>Senior Real Estate Agent</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/150" alt="Jane Smith">
+                    <h3>Jane Smith</h3>
+                    <p>Real Estate Consultant</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/150" alt="Mark Johnson">
+                    <h3>Mark Johnson</h3>
+                    <p>Property Manager</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>

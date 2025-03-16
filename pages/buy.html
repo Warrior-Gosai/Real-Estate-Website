@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="../styles.css" />
+    <title>Buy Sell Property Online</title>
+    <style>
+        .container {
+            width: 90%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .filter {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .filter select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            width: 45%;
+        }
+
+        .property-listings {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .property-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .property-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .property-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .property-info {
+            padding: 20px;
+        }
+
+        .property-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .property-info p {
+            margin-bottom: 10px;
+        }
+
+        .property-info .price {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+
+        @media (max-width: 768px) {
+            .filter {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .filter select {
+                width: 90%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="nav__header">
+            <div class="nav__logo">
+                <a href="#">Hosale.</a>
+            </div>
+            <div class="nav__menu__btn" id="menu-btn">
+                <i class="ri-menu-3-line"></i>
+            </div>
+        </div>
+        <ul class="nav__links" id="nav-links">
+            <li><a href="../index.php">HOME</a></li>
+            <li><a href="./buy.html">BUY</a></li>
+            <li><a href="./sell.php">SELL</a></li>
+            <li><a href="./contact.php">CONTACT</a></li>
+            <li><a href="./login.html">LOGIN</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="filter">
+            <select id="property-type">
+                <option value="all">All Types</option>
+                <option value="apartment">Apartment</option>
+                <option value="house">House</option>
+                <option value="condo">Condo</option>
+            </select>
+
+            <select id="price-range">
+                <option value="all">All Prices</option>
+                <option value="low">Under ₹10,00,000</option>
+                <option value="medium">₹10,00,000 - ₹50,000,000</option>
+                <option value="high">Above ₹50,00,000</option>
+            </select>
+        </div>
+
+        <div class="property-listings" id="property-listings">
+            <!-- Property Cards will be injected here via JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        const propertyListingsContainer = document.getElementById("property-listings");
+        const propertyTypeFilter = document.getElementById("property-type");
+        const priceRangeFilter = document.getElementById("price-range");
+
+        let properties = [];
+
+        // Fetch properties from the PHP backend
+        async function fetchProperties() {
+            const response = await fetch('get_properties.php');
+            const data = await response.json();
+            properties = data;
+            renderProperties(properties);
+        }
+
+        function renderProperties(filteredProperties) {
+            propertyListingsContainer.innerHTML = ""; // Clear existing listings
+            filteredProperties.forEach(property => {
+                const propertyCard = document.createElement("div");
+                propertyCard.classList.add("property-card");
+                propertyCard.innerHTML = `
+                    <img src="${property.property_image}" alt="${property.address}">
+                    <div class="property-info">
+                        <h3>${property.address}</h3>
+                        <p>Type: ${property.property_type.charAt(0).toUpperCase() + property.property_type.slice(1)}</p>
+                        <p>Price: <span class="price">₹${property.asking_price.toLocaleString()}</span></p>
+                    </div>
+                `;
+                propertyListingsContainer.appendChild(propertyCard);
+            });
+        }
+
+        function filterProperties() {
+            const selectedType = propertyTypeFilter.value;
+            const selectedPrice = priceRangeFilter.value;
+
+            const filteredProperties = properties.filter(property => {
+                const matchesType = selectedType === "all" || property.type === selectedType;
+                const matchesPrice = selectedPrice === "all" ||
+                    (selectedPrice === "low" && property.asking_price < 1000000) ||
+                    (selectedPrice === "medium" && property.asking_price >= 1000000 && property.asking_price <= 5000000) ||
+                    (selectedPrice === "high" && property.asking_price > 5000000);
+                return matchesType && matchesPrice;
+            });
+
+            renderProperties(filteredProperties);
+        }
+
+        // Fetch data on page load
+        fetchProperties();
+
+        // Add event listeners for filtering
+        propertyTypeFilter.addEventListener("change", filterProperties);
+        priceRangeFilter.addEventListener("change", filterProperties);
+    </script>
+</body>
+
+</html>
