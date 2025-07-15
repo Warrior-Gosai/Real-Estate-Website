@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -189,7 +190,7 @@
       </div>
     </div>
     <div class="footer__bar">
-      Copyright © 2025 . All rights reserved.
+      Copyright © 2025 . All rights reserved ;)
     </div>
   </footer>
 
